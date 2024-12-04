@@ -28,11 +28,11 @@ The webserver will need three files:
 
 The vendor-data and meta-data files don't need any content, but may need to be there, if
 nothing else, to reduce logged webserver errors:
-'''
+```
 mkdir www
 cd www
 touch {vendor-data,meta-data}
-'''
+```
 
 Place the user-data file in the same www directory, and edit contents as needed. The default
 credentials are ubuntu/ubuntu. Change sizing of LVM volumes as needed.
