@@ -56,5 +56,6 @@ Reference Docs-
 
 Autoinstall config reference:
 - https://canonical-subiquity.readthedocs-hosted.com/en/latest/reference/autoinstall-reference.html
+
 Curtin Storage Options:
 - https://curtin.readthedocs.io/en/latest/topics/storage.html
