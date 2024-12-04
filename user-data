@@ -1,0 +1,187 @@
+#cloud-config
+autoinstall:
+  version: 1
+  identity:
+    hostname: ubuntu
+    password: "$6$exDY1mhS4KUYCE/2$zmn9ToZwTKLhCw.b4/b.ZRTIZM30JZ4QrOQ2aOXJ8yk96xpcCof0kxKwuX1kqLG/ygbJ1f8wxED22bTL4F46P0"
+    username: ubuntu
+  refresh-installer:
+    update: true
+    channel: latest/edge
+  ssh:
+    install-server: true
+    allow-pw: false
+    #authorized-keys:
+     # - "ssh-rsa AAAAB3..."
+  updates: security
+  storage:
+    config:
+    - ptable: gpt
+      path: /dev/vda
+      wipe: superblock-recursive
+      preserve: false
+      name: ''
+      grub_device: true
+      id: disk-vda
+      type: disk
+    - device: disk-vda
+      size: 1048576
+      flag: bios_grub
+      number: 1
+      preserve: false
+      grub_device: false
+      offset: 1048576
+      id: partition-0
+      type: partition
+    - device: disk-vda
+      size: 2147483648
+      wipe: superblock
+      number: 2
+      preserve: false
+      grub_device: false
+      offset: 2097152
+      id: partition-1
+      type: partition
+    - fstype: ext4
+      volume: partition-1
+      preserve: false
+      id: format-0
+      type: format
+    - path: /boot
+      device: format-0
+      id: mount-0
+      type: mount
+    - device: disk-vda
+      size: 24692916224
+      wipe: superblock
+      number: 3
+      preserve: false
+      grub_device: false
+      offset: 2149580800
+      id: partition-2
+      type: partition
+    - name: ubuntu-vg
+      devices:
+      - partition-2
+      preserve: false
+      id: lvm_volgroup-0
+      type: lvm_volgroup
+    - name: root
+      volgroup: lvm_volgroup-0
+      size: 10G
+      wipe: superblock
+      preserve: false
+      path: /dev/ubuntu-vg/root
+      id: lvm_partition-0
+      type: lvm_partition
+    - fstype: ext4
+      volume: lvm_partition-0
+      preserve: false
+      id: format-1
+      type: format
+    - path: /
+      device: format-1
+      id: mount-1
+      type: mount
+    - name: var
+      volgroup: lvm_volgroup-0
+      size: 5G
+      wipe: superblock
+      preserve: false
+      path: /dev/ubuntu-vg/var
+      id: lvm_partition-1
+      type: lvm_partition
+    - fstype: ext4
+      volume: lvm_partition-1
+      preserve: false
+      id: format-2
+      type: format
+    - path: /var
+      device: format-2
+      id: mount-2
+      type: mount
+    - name: var_log
+      volgroup: lvm_volgroup-0
+      size: 1G
+      wipe: superblock
+      preserve: false
+      path: /dev/ubuntu-vg/var_log
+      id: lvm_partition-2
+      type: lvm_partition
+    - fstype: ext4
+      volume: lvm_partition-2
+      preserve: false
+      id: format-3
+      type: format
+    - path: /var/log
+      device: format-3
+      id: mount-3
+      type: mount
+    - name: var_log_audit
+      volgroup: lvm_volgroup-0
+      size: 1G
+      wipe: superblock
+      preserve: false
+      path: /dev/ubuntu-vg/var_log_audit
+      id: lvm_partition-3
+      type: lvm_partition
+    - fstype: ext4
+      volume: lvm_partition-3
+      preserve: false
+      id: format-4
+      type: format
+    - path: /var/log/audit
+      device: format-4
+      id: mount-4
+      type: mount
+    - name: var_tmp
+      volgroup: lvm_volgroup-0
+      size: 1G
+      wipe: superblock
+      preserve: false
+      path: /dev/ubuntu-vg/var_tmp
+      id: lvm_partition-4
+      type: lvm_partition
+    - fstype: ext4
+      volume: lvm_partition-4
+      preserve: false
+      id: format-5
+      type: format
+    - path: /var/tmp
+      device: format-5
+      id: mount-5
+      type: mount
+    - name: home
+      volgroup: lvm_volgroup-0
+      size: 1G
+      wipe: superblock
+      preserve: false
+      path: /dev/ubuntu-vg/home
+      id: lvm_partition-5
+      type: lvm_partition
+    - fstype: ext4
+      volume: lvm_partition-5
+      preserve: false
+      id: format-6
+      type: format
+    - path: /home
+      device: format-6
+      id: mount-6
+      type: mount
+    - name: tmp
+      volgroup: lvm_volgroup-0
+      size: 1G
+      wipe: superblock
+      preserve: false
+      path: /dev/ubuntu-vg/tmp
+      id: lvm_partition-6
+      type: lvm_partition
+    - fstype: ext4
+      volume: lvm_partition-6
+      preserve: false
+      id: format-7
+      type: format
+    - path: /tmp
+      device: format-7
+      id: mount-7
+      type: mount

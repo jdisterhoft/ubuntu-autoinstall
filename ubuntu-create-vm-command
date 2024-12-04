@@ -1,0 +1,11 @@
+virt-install \
+  --name=ubuntu \
+  --memory=4096 \
+  --vcpus=2 \
+  --disk size=25 \
+  --network bridge=br0 \
+  --os-variant=ubuntu24.04 \
+  --location='/iso/ubuntu-24.04-live-server-amd64.iso,kernel=casper/vmlinuz,initrd=casper/initrd' \
+  --extra-args='ip=dhcp autoinstall ds=nocloud-net;s=http://<webserver_ip:3003>/ console=ttyS0 noipv6' \
+  --console pty,target_type=serial \
+  --graphics none 
