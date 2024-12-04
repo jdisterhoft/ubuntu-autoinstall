@@ -38,9 +38,9 @@ Place the user-data file in the same www directory, and edit contents as needed.
 credentials are ubuntu/ubuntu. Change sizing of LVM volumes as needed.
 
 When the files are in place, you can run via python with:
-'''
+```
 python3 -m http.server 3003
-'''
+```
 
 When substituting the webserver ip/port in the 'virt-install' command, make sure to use the 
 external IP/port, and that firewalls allow access.
