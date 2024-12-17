@@ -47,6 +47,7 @@ external IP/port, and that firewalls allow access.
 
 
 Other Notes- 
+- You can remove the "--graphics none" option to have this run without console output (you won't be consoled into the process)
 - When looking for autoinstall options, check the reference docs, or you can do a manual
 install of Ubuntu with the needed options, and look in the /var/log/autoinstall-user-data 
 file after complete install to view syntax.
